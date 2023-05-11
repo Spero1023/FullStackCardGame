@@ -63,20 +63,30 @@ console.log(deck.draw());
 console.log(deck.deal());
 
 class Hand {
-  constructor(currentCards) {
-    this.currentCards = currentCards;
+  constructor(cards = []) {
+    this.cards = cards
+  }
+  addCard(card) {
+    this.cards.push(card)
+  }
+  playCard(card) {
+    const index = this.cards.indexOf(card)
+    if (index >= -1) {
+      this.cards.splice(index, 1)
+      return card
+    }
+    return null;
+  }
+  toStr() {
+    return this.cards.join(",")
+  }
+  render() {
+    const cardList = document.createElement("ul");
+    cardList.classList.add("hand");
+    for(const card of this.cards) {
+      const cardItem = card.render();
+      cardList.append(cardItem);
+    }
+    return cardList;
   }
 }
-// const shuffleDeck = deck => {
-//   console.log('shuffling', deck);
-
-//   for (let i = deck.length - 1; i > 0; i--) {
-//     deck[i].playedByPlayer = false;
-//     let j = Math.floor(Math.random() * (i + 1));
-//     let temp = deck[i];
-//     deck[i] = deck[j];
-//     deck[j] = temp;
-//   }
-//   console.log(deck, 'shuffled');
-//   shuffleFX.play();
-//};
