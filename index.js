@@ -47,7 +47,7 @@ class Deck {
     let players = [];
     while (players.length <= 1) {
       let hand = [];
-      while (hand.length < 5) {
+      while (hand.length < 2) {
         hand.push(this.draw(deck));
       }
       players.push(hand);
@@ -90,3 +90,5 @@ class Hand {
     return cardList;
   }
 }
+
+
